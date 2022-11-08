@@ -1,15 +1,18 @@
 #include <iostream>
 
+extern "C" {
+#include <libavutil/log.h>
+};
+
+
 void goo();
+
 void foo();
+
 int main() {
     std::cout << "Hello, World!" << std::endl;
     goo();
     foo();
-//    int tmp = 0;
-//    scanf("%d", tmp);
-//    printf("%d",tmp);
-//    std::cin >> tmp;
-//    std::cout << tmp;
+    av_log_set_level(AV_LOG_DEBUG);
     return 0;
 }
