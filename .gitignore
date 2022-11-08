@@ -1,0 +1,10 @@
+.idea
+*.apk
+/cmake-build-debug-mingw
+/haha/lib
+/hehe/lib
+
+/haha/cmake-build*
+/hehe/cmake-build*
+
+/output
