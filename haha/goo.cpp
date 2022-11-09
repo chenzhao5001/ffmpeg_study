@@ -2,5 +2,5 @@
 #include "goo.h"
 
 void goo() {
-    printf("hello  goo!");
+    printf("hello  goo!\n");
 }
