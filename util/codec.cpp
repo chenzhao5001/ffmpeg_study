@@ -12,10 +12,14 @@ extern "C" {
 #include "codec.h"
 
 void enCode() {
+    AVCodecContext* ctx = NULL;
+    AVFrame* pFrame = NULL;
+    AVPacket* pPacket = NULL;
     try {
         //1.输入参数
-        //2.查找编解码器
 
+        char* dst = NULL;
+        //2.查找编解码器
         // ffmpeg查找编解码器的方法有两种 1，通过id 2,通过名字 此处通过名字
 
         const AVCodec* codec = avcodec_find_encoder_by_name("");
@@ -24,8 +28,8 @@ void enCode() {
             throw -10002;
         }
 
-        //3.创建编解码上下文
-        AVCodecContext* ctx =  avcodec_alloc_context3(codec);
+        //3.创建编码器上下文
+        ctx =  avcodec_alloc_context3(codec);
         if(!ctx) {
             av_log(NULL,AV_LOG_ERROR,"avcodec_alloc_context3 err");
             throw -10003;
@@ -50,15 +54,55 @@ void enCode() {
         }
 
 
-        //5.编码器 解码器 上下文绑定到一起
+        //5.编码器与编码器 上下文绑定到一起
+        int ret = avcodec_open2(ctx,codec,NULL);
+        if(ret < 0) {
+            av_log(NULL,AV_LOG_ERROR,"avcodec_open2 error!!");
+            throw 10003;
+        }
         //6.创建输出文件
+
+        FILE* f = fopen(dst,);
+        if(!f) {
+            av_log(NULL,AV_LOG_ERROR,"fopen err, fileName = %s",dst);
+            throw 10005;
+        }
         //7.创建AVFrame
+        //分配的只是个外壳,里面还有data域, avFrame不会对data分配空间
+        pFrame = av_frame_alloc();
+        if(!pFrame) {
+            av_log(NULL,AV_LOG_ERROR,"av_frame_alloc 失败!");
+            throw 10006;
+        }
+
+        // 为 avFrame data域分配空间
+        // 对齐方式,如果填0,与cpu自动对齐
+        ret = av_frame_get_buffer(pFrame,0);
+        if(ret < 0) {
+            av_log(NULL,AV_LOG_ERROR,"av_frame_get_buffer 失败!");
+            throw 10007;
+        }
         //8.创建AVPacket
+        pPacket = av_packet_alloc();
+        if(!pPacket) {
+            av_log(NULL,AV_LOG_ERROR,"av_packet_alloc 失败!");
+            throw 10007;
+        }
         //9.生成视频内容
         //10.编码
     } catch (int err) {
 
     }
 
+    // 释放资源
+    if(ctx) {
+        avcodec_free_context(&ctx);
+    }
+    if(pFrame) {
+        av_frame_free(&pFrame);
+    }
+    if(pPacket) {
+        av_packet_free(&pPacket);
+    }
 
 }
