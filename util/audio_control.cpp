@@ -14,6 +14,7 @@ int getAudioStream(char* src,char* dst) {
     int ret = 0;
     AVFormatContext* pFMtCxt = NULL;
     AVFormatContext* oFMtCxt = NULL;
+    AVPacket pkt;
     int idx = 0;
     // 打开多媒体文件
     // src 支持本地 和 远端
@@ -22,7 +23,7 @@ int getAudioStream(char* src,char* dst) {
     // return <0 错误  >0成功
 
     if((ret = avformat_open_input(&pFMtCxt,src,NULL,NULL)) < 0) {
-        av_log(NULL,AV_LOG_ERROR,"avformat_open_input %s\n",av_err2str(ret));
+//        av_log(NULL,AV_LOG_ERROR,"avformat_open_input %s\n",av_err2str(ret));
         return ret;
     }
 
@@ -52,18 +53,71 @@ int getAudioStream(char* src,char* dst) {
         //6.设置输出音频参数
         // 为目标文件创音频流
         AVStream* outStream = avformat_new_stream(oFMtCxt,NULL);
-        AVStream* inputSteam = pFMtCxt->streams[idx];
-        avcodec_parameters_copy(outStream->codecpar,inputSteam->codecpar);
+        AVStream* inStream = pFMtCxt->streams[idx];
+        avcodec_parameters_copy(outStream->codecpar,inStream->codecpar);
         // 设置成0  更具多媒体文件自动适配 编解码器，除非很了解，建议设置成0.
         outStream-> codecpar->codec_tag = 0;
 
+        // 绑定目标文件
+        // AVIOContext
+        // flags 设置读写权限
+        // AVIOInterruptCB 回调函数，此处不用
+        // AVDictionary 私有协议设置，此处不用
+        ret = avio_open2(&oFMtCxt->pb, dst,AVIO_FLAG_WRITE,NULL,NULL);
+        if(ret < 0) {
+            av_log(oFMtCxt,AV_LOG_ERROR,"avio_open2 err ret = %d",ret);
+            throw ret;
+        }
+        //7 写多媒体文件到目的文件。
+        ret = avformat_write_header(oFMtCxt,NULL);
+        if(ret < 0) {
+            av_log(oFMtCxt,AV_LOG_ERROR,"avformat_write_header err ret = %d",ret);
+            throw ret;
+        }
 
+        //8 从源多媒体文件中读音频数据到目的文件
+
+        //从多媒体文件中读取帧数据
+        while (av_read_frame(pFMtCxt,&pkt) > 0) {
+
+            //看读取的数据是否是预期的流数据
+            if(pkt.stream_index == idx) {
+                // pts dts 的概念是什么？
+                // 参数1 原始pts,参数2 输入流的时间基 3输出流时间基本 4 设置近似值
+                pkt.pts = av_rescale_q_rnd(pkt.pts,inStream->time_base,outStream->time_base,AV_ROUND_NEAR_INF);
+                pkt.dts = pkt.pts;
+                pkt.duration = av_rescale_q(pkt.duration,inStream->time_base,outStream->time_base);
+
+                //只抽取了一路音频，这里设置成0
+                pkt.stream_index = 0;
+                // 相对位置？ 设置成-1，自己进行积算
+                pkt.pos = -1;
+
+                av_interleaved_write_frame(oFMtCxt,&pkt);
+                //减少包的引用计数，相当于包被释放了，子读取pkt又是个新包
+                av_packet_unref(&pkt);
+            }
+
+        }
+        //9 写多媒体文件尾到目的文件
+        av_write_trailer(oFMtCxt);
 
     } catch(int errRet) {
-        if(!pFMtCxt) {
-            avformat_close_input(&pFMtCxt);
-            oFMtCxt = NULL;
+
+    }
+
+    //10 释放申请的资源。
+    if(pFMtCxt) {
+        avformat_close_input(&pFMtCxt);
+        pFMtCxt = NULL;
+    }
+
+    if(oFMtCxt) {
+        if(oFMtCxt->pb) {
+            avio_close(oFMtCxt->pb);
         }
+        avformat_close_input(&oFMtCxt);
+        oFMtCxt = NULL;
     }
 
     return ret;
