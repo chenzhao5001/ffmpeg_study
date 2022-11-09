@@ -14,7 +14,7 @@ INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/ffmpeg/include")
 
 
 link_directories(${PROJECT_SOURCE_DIR}/ffmpeg/lib)
-add_executable(ffmpeg_test main.cpp util/io_test.cpp util/io_test.h util/audio_control.cpp util/audio_control.h)  #这里我调了很久，add_executable 要在 link_directories后面
+add_executable(ffmpeg_test main.cpp util/io_test.cpp util/io_test.h util/audio_control.cpp util/audio_control.h util/codec.cpp util/codec.h)  #这里我调了很久，add_executable 要在 link_directories后面
 
 
 
