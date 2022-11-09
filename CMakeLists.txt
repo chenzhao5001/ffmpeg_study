@@ -24,8 +24,7 @@ add_executable(ffmpeg_test
         util/audio_control.h
         util/codec.cpp
         util/codec.h
-        player/player.c
-        player/player.h)  #这里我调了很久，add_executable 要在 link_directories后面
+        player/newPlay.cpp player/newPlay.h)  #这里我调了很久，add_executable 要在 link_directories后面
 
 
 
