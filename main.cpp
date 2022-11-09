@@ -17,6 +17,6 @@ void foo();
 int main() {
     std::cout << "Hello, World!" << std::endl;
     av_log_set_level(AV_LOG_DEBUG);  //设置日志级别
-    openDir("./");
+//    openDir("./");
     return 0;
 }

@@ -11,10 +11,21 @@ ADD_SUBDIRECTORY(hehe)
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/haha") #要到haha目录，否则找不到
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/hehe")
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/ffmpeg/include")
+INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/sdl/include")
 
 
 link_directories(${PROJECT_SOURCE_DIR}/ffmpeg/lib)
-add_executable(ffmpeg_test main.cpp util/io_test.cpp util/io_test.h util/audio_control.cpp util/audio_control.h util/codec.cpp util/codec.h)  #这里我调了很久，add_executable 要在 link_directories后面
+link_directories(${PROJECT_SOURCE_DIR}/sdl/lib)
+add_executable(ffmpeg_test
+        main.cpp
+        util/io_test.cpp
+        util/io_test.h
+        util/audio_control.cpp
+        util/audio_control.h
+        util/codec.cpp
+        util/codec.h
+        player/player.c
+        player/player.h)  #这里我调了很久，add_executable 要在 link_directories后面
 
 
 
@@ -23,6 +34,7 @@ target_link_libraries( # Specifies the target library.
         avcodec.lib
         avutil.lib
         avformat.lib
+        SDL2.lib
         hehe
         haha)
 
