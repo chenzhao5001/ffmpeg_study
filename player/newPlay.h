@@ -4,11 +4,12 @@
 
 #ifndef FFMPEG_TEST_NEWPLAY_H
 #define FFMPEG_TEST_NEWPLAY_H
+#define SDL_MAIN_HANDLED
 
 extern "C" {
-#include <libavutil/log.h>
-#include <libavformat/avformat.h>
-#include <libavcodec/avcodec.h>
+//#include <libavutil/log.h>
+//#include <libavformat/avformat.h>
+//#include <libavcodec/avcodec.h>
 #include <SDL.h>
 };
 
@@ -16,11 +17,13 @@ extern "C" {
 
 class NewPlayer {
 
-    SDL_Window* mWindow = NULL;
-    SDL_Renderer* mRender = NULL;
+    SDL_Window* pWindow = NULL;
+    SDL_Renderer* pRender = NULL;
 
+public:
     NewPlayer();
     ~NewPlayer();
+private:
 };
 
 #endif //FFMPEG_TEST_NEWPLAY_H
