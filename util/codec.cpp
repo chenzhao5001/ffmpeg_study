@@ -15,6 +15,7 @@ void enCode() {
     AVCodecContext* ctx = NULL;
     AVFrame* pFrame = NULL;
     AVPacket* pPacket = NULL;
+    FILE* f = NULL;
     try {
         //1.输入参数
 
@@ -62,7 +63,7 @@ void enCode() {
         }
         //6.创建输出文件
 
-        FILE* f = fopen(dst,);
+        f = fopen(dst,"w");
         if(!f) {
             av_log(NULL,AV_LOG_ERROR,"fopen err, fileName = %s",dst);
             throw 10005;
@@ -103,6 +104,9 @@ void enCode() {
     }
     if(pPacket) {
         av_packet_free(&pPacket);
+    }
+    if(f) {
+        fclose(f);
     }
 
 }
