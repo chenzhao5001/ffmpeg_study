@@ -23,6 +23,7 @@ int getAudioStream(char* src,char* dst) {
     // return <0 错误  >0成功
 
     if((ret = avformat_open_input(&pFMtCxt,src,NULL,NULL)) < 0) {
+        // 编译不通过 由于 c c++ 编译冲突
 //        av_log(NULL,AV_LOG_ERROR,"avformat_open_input %s\n",av_err2str(ret));
         return ret;
     }
