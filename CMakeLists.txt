@@ -41,8 +41,8 @@ target_link_libraries( # Specifies the target library.
         avcodec.lib
         avutil.lib
         avformat.lib
-        SDL2.lib
-        glfw3.lib
+        SDL2.dll
+        glfw3.a
         hehe
         haha)
 
