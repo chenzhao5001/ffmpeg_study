@@ -32,7 +32,7 @@ add_executable(ffmpeg_test
         player/openglPlayer.cpp
         player/openglPlayer.h
         window/windowControl.cpp
-        window/windowControl.h)
+        window/windowControl.h window/MediaControl.cpp window/MediaControl.h)
 
 
 

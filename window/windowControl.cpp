@@ -7,7 +7,8 @@ WindowControl::WindowControl() {
 WindowControl::~WindowControl() {}
 
 void WindowControl::createWindow() {
-    pWindow = SDL_CreateWindow("测试",100,100,640,480,SDL_WINDOW_OPENGL);
+    pWindow = SDL_CreateWindow("测试 player",100,100,640,480,
+                               SDL_WINDOW_OPENGL|SDL_WINDOW_RESIZABLE);
     pRender = SDL_CreateRenderer(pWindow,-1,0);
     SDL_SetRenderDrawColor(pRender,255,0,0,255);
     SDL_RenderClear(pRender);
