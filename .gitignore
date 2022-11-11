@@ -1,6 +1,7 @@
 .idea
 *.apk
 /cmake-build-debug-mingw
+/cmake-build-debug-visual-studio
 /haha/lib
 /hehe/lib
 

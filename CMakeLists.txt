@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.23)
 project(ffmpeg_test)
-set(CMAKE_CXX_STANDARD 14)
-set(lib_src_DIR ${PROJECT_SOURCE_DIR}/ffmpeg/lib)
+set(CMAKE_CXX_STANDARD 11)
 
 
 
@@ -12,10 +11,14 @@ INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/haha") #要到haha目录，否则找�
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/hehe")
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/ffmpeg/include")
 INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/sdl/include")
+INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/glfw/include")
 
 
 link_directories(${PROJECT_SOURCE_DIR}/ffmpeg/lib)
 link_directories(${PROJECT_SOURCE_DIR}/sdl/lib)
+link_directories(${PROJECT_SOURCE_DIR}/glfw/lib)
+
+#这里我调了很久，add_executable 要在 link_directories后面
 add_executable(ffmpeg_test
         main.cpp
         util/io_test.cpp
@@ -25,7 +28,11 @@ add_executable(ffmpeg_test
         util/codec.cpp
         util/codec.h
         player/newPlay.cpp
-        player/newPlay.h)  #这里我调了很久，add_executable 要在 link_directories后面
+        player/newPlay.h
+        player/openglPlayer.cpp
+        player/openglPlayer.h
+        window/windowControl.cpp
+        window/windowControl.h)
 
 
 
@@ -35,6 +42,7 @@ target_link_libraries( # Specifies the target library.
         avutil.lib
         avformat.lib
         SDL2.lib
+        glfw3.lib
         hehe
         haha)
 

@@ -4,5 +4,5 @@
 
 #ifndef FFMPEG_TEST_FOO_H
 #define FFMPEG_TEST_FOO_H
-
+__declspec(dllexport) int __stdcall foo(void);
 #endif //FFMPEG_TEST_FOO_H

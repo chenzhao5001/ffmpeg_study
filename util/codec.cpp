@@ -41,8 +41,8 @@ void enCode() {
         ctx->height = 480;
         ctx->bit_rate = 500*1000; //设置码率
 
-        ctx->time_base = (AVRational){1,25}; // 时间基 1 / 25
-        ctx->framerate = (AVRational){25,1}; // 帧率 25 / 1
+        ctx->time_base = AVRational{1,25}; // 时间基 1 / 25
+        ctx->framerate = AVRational{25,1}; // 帧率 25 / 1
         ctx->gop_size = 10;  // 一组帧的大小(每10帧编成一组)
         ctx->max_b_frames = 1; //一组最多包含多少B帧，一般不超过3
         ctx->pix_fmt = AV_PIX_FMT_YUV420P; // 数据源类型
