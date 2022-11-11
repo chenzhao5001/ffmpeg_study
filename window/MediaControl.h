@@ -9,6 +9,7 @@ extern "C" {
 #include <libavutil/log.h>
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
+#include <libavcodec/avcodec.h>
 };
 
 #include <string>
@@ -22,7 +23,12 @@ public:
     void openFmt(std::string path);
 
 private:
-    AVFormatContext* fmt = NULL;
+    AVFormatContext* fmt = nullptr;
+    int idx = -1; //流id
+    AVStream* inStream = nullptr; // 输入流
+    const AVCodec* dec = nullptr;  //解码器
+    AVCodecContext* decCtx = nullptr; // 解码器上下文
+
 
 };
 

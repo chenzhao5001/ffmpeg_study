@@ -16,13 +16,15 @@ int main() {
     std::cout << p << std::endl;
 
 
-//    WindowControl wCtrl;
-//
-//    MediaControl mediaControl;
-//    mediaControl.openFmt("./test.mp4");
-//
-//    wCtrl.createWindow();
-//    wCtrl.playWindow();
+
+
+    WindowControl wCtrl;
+
+    MediaControl mediaControl;
+    mediaControl.openFmt("./test.mp4");
+
+    wCtrl.createWindow();
+    wCtrl.playWindow();
 
 
     return 0;
