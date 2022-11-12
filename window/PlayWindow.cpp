@@ -6,10 +6,23 @@
 #include "MediaControl.h"
 
 PlayWindow::PlayWindow() {
+    SDL_Init(SDL_INIT_VIDEO);
 
 }
 PlayWindow::~PlayWindow(){
-
+    if(pWindow) {
+        SDL_DestroyWindow(pWindow);
+        pWindow = nullptr;
+    }
+    if(pRender) {
+        SDL_DestroyRenderer(pRender);
+        pRender = nullptr;
+    }
+    if(pTexture) {
+        SDL_DestroyTexture(pTexture);
+        pTexture = nullptr;
+    }
+    SDL_Quit();
 }
 
 

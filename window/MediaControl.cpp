@@ -18,7 +18,8 @@ MediaControl::~MediaControl() {
         avcodec_free_context(&decCtx);
     }
     if(fmt) {
-        avformat_free_context(fmt);
+        avformat_close_input(&fmt);
+//        avformat_free_context(fmt);
     }
 }
 

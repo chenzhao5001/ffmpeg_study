@@ -16,7 +16,7 @@ class PlayWindow {
 
     SDL_Window* pWindow = nullptr;
     SDL_Renderer* pRender = nullptr;
-    SDL_Texture* texture =  nullptr;
+    SDL_Texture* pTexture =  nullptr;
     MediaControl mediaControl;
     std::string playFile = "";
     int winQuit = 1;
