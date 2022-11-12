@@ -23,7 +23,11 @@ void PlayWindow::setWindowInfo(std::string title,int x,int y,int w,int h) {
 }
 
 void PlayWindow::windowPlayMedia() {
+    mediaControl.openFmt(playFile);
+}
 
+void PlayWindow::setPlayFilePath(std::string path) {
+    playFile = path;
 }
 
 void PlayWindow::windowShow() {

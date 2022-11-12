@@ -11,17 +11,21 @@ extern "C" {
 };
 
 #include <string>
+#include "MediaControl.h"
 class PlayWindow {
 
     SDL_Window* pWindow = nullptr;
     SDL_Renderer* pRender = nullptr;
     SDL_Texture* texture =  nullptr;
+    MediaControl mediaControl;
+    std::string playFile = "";
     int winQuit = 1;
 
 public:
     PlayWindow();
     ~PlayWindow();
     void setWindowInfo(std::string title,int x,int y,int w,int h);
+    void setPlayFilePath(std::string path);
     void windowShow();
     void windowPlayMedia();
     void windowClose();
