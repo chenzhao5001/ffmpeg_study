@@ -1,10 +1,11 @@
 #include "window/PlayWindow.h"
 
 //void extra_audio();
-void extra_video();
+//void extra_video();
+void remux();
 int main() {
 
-    extra_video();
+    remux();
 
 //    PlayWindow playWindow;
 //    playWindow.mediaInit();
