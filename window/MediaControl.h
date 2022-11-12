@@ -19,22 +19,34 @@ struct MediaRect {
     int width;
     int height;
 };
-typedef struct _VideoState {
+
+struct VideoState {
     AVCodecContext* avCtx;
     AVPacket*       avPkt;
     AVFrame*        avFrame;
     SDL_Texture*    texture;
-} VideoState;
+};
+
+struct WindowCell{
+    SDL_Window* pWindow = nullptr;
+    SDL_Renderer* pRender = nullptr;
+    SDL_Texture* pTexture =  nullptr;
+};
+
+
 
 
 class MediaControl {
 public:
     MediaControl();
     ~MediaControl();
+    void setWindow(WindowCell windowCell);
     MediaRect openFmt(std::string path);
 
 
 private:
+    WindowCell windowCell;
+
     AVFormatContext* fmt = nullptr;
 
     int idx = -1; //流id

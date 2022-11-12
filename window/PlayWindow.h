@@ -20,6 +20,8 @@ class PlayWindow {
     MediaControl mediaControl;
     std::string playFile = "";
     int winQuit = 1;
+    WindowCell windowCell;
+
 
 public:
     PlayWindow();

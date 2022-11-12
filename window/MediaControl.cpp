@@ -23,8 +23,9 @@ MediaControl::~MediaControl() {
     }
 }
 
-
-
+void MediaControl::setWindow(WindowCell windowCell) {
+    this->windowCell = windowCell;
+}
 
 
 MediaRect MediaControl::openFmt(std::string path) {
@@ -52,15 +53,29 @@ MediaRect MediaControl::openFmt(std::string path) {
 
     avPacket = av_packet_alloc();
     avFrame= av_frame_alloc();
+    VideoState videoState;
+
+    videoState.avCtx = decCtx;
+    videoState.avPkt = avPacket;
+    videoState.avFrame = avFrame;
+    videoState.texture = nullptr;
+
+
     // 从多媒体文件中读取数据
     while (av_read_frame(fmt,avPacket) > 0) {
         if(avPacket->stream_index == idx) {
+            decode(videoState);
 //            this->dec(this->decCtx,)
         }
 
         //每次调用要减引用基数，否则有内存泄露
         av_packet_unref(avPacket);
     }
+
+    //清楚缓冲区
+    videoState.avPkt = nullptr;
+    decode(videoState);
+
 
     int width = this->decCtx->width;
     int height = this->decCtx->height;
@@ -87,5 +102,16 @@ int MediaControl::decode(VideoState& videoState) {
 }
 
 void MediaControl::render(VideoState& videoState) {
-
+    // rect 设置成null，整个纹理进行更新
+    // 渲染纹理
+    SDL_UpdateYUVTexture(videoState.texture,
+                         nullptr,
+                         videoState.avFrame->data[0], videoState.avFrame->linesize[0], // yvu 中的Y
+                         videoState.avFrame->data[1], videoState.avFrame->linesize[1], // U
+                         videoState.avFrame->data[2], videoState.avFrame->linesize[2]  // V
+                         );
+    SDL_RenderClear(windowCell.pRender);
+    // null1 整个纹理  null2 整个窗口
+    SDL_RenderCopy(windowCell.pRender, windowCell.pTexture, nullptr, nullptr);
+    SDL_RenderPresent(windowCell.pRender);
 }

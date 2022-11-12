@@ -23,6 +23,7 @@ PlayWindow::~PlayWindow(){
 
 void PlayWindow::mediaInit() {
 
+//    mediaControl.setWindow(pWindow);
 }
 
 void PlayWindow::setWindowInfo(std::string title,int x,int y,int w,int h) {
@@ -32,6 +33,12 @@ void PlayWindow::setWindowInfo(std::string title,int x,int y,int w,int h) {
     SDL_SetRenderDrawColor(pRender,255,0,0,255);
     SDL_RenderClear(pRender);
     SDL_RenderPresent(pRender);
+
+    windowCell.pWindow = pWindow;
+    windowCell.pRender = pRender;
+    windowCell.pTexture = nullptr;
+    mediaControl.setWindow(windowCell);
+
 }
 
 void PlayWindow::windowPlayMedia() {
