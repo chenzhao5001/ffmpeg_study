@@ -6,7 +6,6 @@ int main() {
 
     extra_video();
 
-
 //    PlayWindow playWindow;
 //    playWindow.mediaInit();
 //    playWindow.setWindowInfo("hello", 100,100,600,400);

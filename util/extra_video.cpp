@@ -70,7 +70,13 @@ void extra_video() {
             // 时间基（毫秒，微妙）
             avPacket.pts = av_rescale_q_rnd(avPacket.pts,inStream->time_base,outStream->time_base,
                                             static_cast<AVRounding>(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
-            avPacket.dts = avPacket.pts;
+
+            // 这里音视频不一致，音频dts一定等于pts,视频不一定
+            // avPacket.dts = avPacket.pts;
+            // 视频要从源数据里获取
+            avPacket.dts = av_rescale_q_rnd(avPacket.dts,inStream->time_base,outStream->time_base,
+                                            static_cast<AVRounding>(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
+
             avPacket.duration = av_rescale_q(avPacket.duration,inStream->time_base,outStream->time_base);
             avPacket.stream_index = 0;
             avPacket.pos = -1;
