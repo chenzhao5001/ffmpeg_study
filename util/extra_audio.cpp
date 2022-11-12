@@ -1,6 +1,3 @@
-//
-// Created by chenz on 2022/11/12.
-//
 #include <string>
 #include <iostream>
 extern "C" {
@@ -10,7 +7,7 @@ extern "C" {
 
 using namespace std;
 
-string errInfo(int errCode) {
+static string errInfo(int errCode) {
     char errStr[256] = { 0 };
     av_strerror(errCode, errStr, sizeof(errStr));
     return string(errStr);

@@ -1,9 +1,10 @@
 #include "window/PlayWindow.h"
 
-void extra_audio();
+//void extra_audio();
+void extra_video();
 int main() {
 
-    extra_audio();
+    extra_video();
 
 
 //    PlayWindow playWindow;

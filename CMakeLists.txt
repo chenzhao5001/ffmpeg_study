@@ -23,11 +23,10 @@ add_executable(ffmpeg_test
         main.cpp
         util/io_test.cpp
         util/io_test.h
-        util/audio_control.cpp
-        util/audio_control.h
         util/codec.cpp
         util/codec.h
-        util/audio_extra.cpp
+        util/extra_audio.cpp
+        util/extra_video.cpp
 
         player/newPlay.cpp
         player/newPlay.h
