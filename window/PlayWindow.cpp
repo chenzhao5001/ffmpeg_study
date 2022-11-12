@@ -34,9 +34,12 @@ void PlayWindow::setWindowInfo(std::string title,int x,int y,int w,int h) {
     SDL_RenderClear(pRender);
     SDL_RenderPresent(pRender);
 
+    pTexture = SDL_CreateTexture(pRender,SDL_PIXELFORMAT_ABGR8888,
+                      SDL_TEXTUREACCESS_TARGET,600,450);
+
     windowCell.pWindow = pWindow;
     windowCell.pRender = pRender;
-    windowCell.pTexture = nullptr;
+    windowCell.pTexture = pTexture;
     mediaControl.setWindow(windowCell);
 
 }
