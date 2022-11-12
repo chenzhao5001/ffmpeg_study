@@ -87,7 +87,7 @@ int MediaControl::decode(VideoState& videoState) {
     int ret = -1;
     char buf[1024];
     ret = avcodec_send_packet(videoState.avCtx,videoState.avPkt);
-    std::cout << "avcodec_send_packet called,ret = " << ret << std::endl;
+//    std::cout << "avcodec_send_packet called,ret = " << ret << std::endl;
 
     while (ret >=0) {
         // 解码成功后 videoState.avFrame 里面就有解码后的frame
@@ -115,4 +115,5 @@ void MediaControl::render(VideoState& videoState) {
     // null1 整个纹理  null2 整个窗口
     SDL_RenderCopy(windowCell.pRender, windowCell.pTexture, nullptr, nullptr);
     SDL_RenderPresent(windowCell.pRender);
+    std::cout << "test" << std::endl;
 }

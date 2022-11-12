@@ -1,3 +1,4 @@
+#include <iostream>
 #include "PlayWindow.h"
 #include "MediaControl.h"
 
@@ -55,6 +56,7 @@ void PlayWindow::setPlayFilePath(std::string path) {
 void PlayWindow::windowShow() {
     SDL_Event mWinEv;
     do {
+        std::cout << "1111" << std::endl;
 //        SDL_WaitEvent(&mWinEv);
         SDL_PollEvent(&mWinEv);
         switch (mWinEv.type) {

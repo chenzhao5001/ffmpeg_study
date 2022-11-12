@@ -8,6 +8,6 @@ int main() {
     playWindow.setPlayFilePath("./test.mp4");
     playWindow.windowPlayMedia();
 
-    playWindow.windowShow();
+//    playWindow.windowShow();
     return 0;
 }
