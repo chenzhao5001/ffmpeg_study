@@ -31,6 +31,7 @@ void extra_video() {
     int index = av_find_best_stream(avFormatContext,AVMEDIA_TYPE_VIDEO,-1,-1, nullptr,0);
     cout << index << endl;
 
+    //可以用avformat_alloc_output_context2 代替下面两步
     // 输出文件上下文
     oAVFormatContext = avformat_alloc_context();
     cout << "avformat_alloc_context ret = " << oAVFormatContext << endl;
