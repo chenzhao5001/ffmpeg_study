@@ -31,12 +31,11 @@ add_executable(ffmpeg_test
         player/newPlay.h
         player/openglPlayer.cpp
         player/openglPlayer.h
-        window/windowControl.cpp
-        window/windowControl.h
+
         window/MediaControl.cpp
         window/MediaControl.h
-        window/mediaWindow.cpp
-        window/mediaWindow.h window/PlayWindow.cpp window/PlayWindow.h)
+        window/PlayWindow.cpp
+        window/PlayWindow.h)
 
 
 

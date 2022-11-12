@@ -1,9 +1,4 @@
-#include <iostream>
-#include "window/windowControl.h"
-//#include "window/MediaControl.h"
-
 #include "window/PlayWindow.h"
-
 
 int main() {
 

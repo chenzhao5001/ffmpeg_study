@@ -24,6 +24,7 @@ class PlayWindow {
 public:
     PlayWindow();
     ~PlayWindow();
+    void mediaInit();
     void setWindowInfo(std::string title,int x,int y,int w,int h);
     void setPlayFilePath(std::string path);
     void windowShow();

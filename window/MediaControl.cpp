@@ -83,6 +83,7 @@ int MediaControl::decode(VideoState& videoState) {
         }
         render(videoState);
     }
+    return ret;
 }
 
 void MediaControl::render(VideoState& videoState) {

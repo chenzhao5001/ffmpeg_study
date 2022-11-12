@@ -1,7 +1,3 @@
-//
-// Created by chenz on 2022/11/12.
-//
-
 #include "PlayWindow.h"
 #include "MediaControl.h"
 
@@ -25,6 +21,9 @@ PlayWindow::~PlayWindow(){
     SDL_Quit();
 }
 
+void PlayWindow::mediaInit() {
+
+}
 
 void PlayWindow::setWindowInfo(std::string title,int x,int y,int w,int h) {
     pWindow = SDL_CreateWindow("title",x,y,w,h,

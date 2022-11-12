@@ -15,9 +15,6 @@ extern "C" {
 };
 
 #include <string>
-#include "windowControl.h"
-#include "mediaWindow.h"
-
 struct MediaRect {
     int width;
     int height;
