@@ -12,24 +12,7 @@ int main() {
     playWindow.setPlayFilePath("./test.mp4");
     playWindow.windowPlayMedia();
 
+
     playWindow.windowShow();
-
-
-//    WindowControl wCtrl;
-//    wCtrl
-
-//    MediaWindow* mediaWindow = wCtrl.createWindow("play_test",100,100,600,400);
-
-//    wCtrl.playWindow();
-
-
-//    wCtrl.createWindow();
-//    MediaRect mediaRect = mediaControl.openFmt("./test.mp4");
-//
-//    wCtrl.createTexture(mediaRect.width,mediaRect.height);
-//    wCtrl.playWindow();
-
-
-
     return 0;
 }

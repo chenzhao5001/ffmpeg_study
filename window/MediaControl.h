@@ -31,10 +31,16 @@ public:
 
 private:
     AVFormatContext* fmt = nullptr;
+
     int idx = -1; //流id
     AVStream* inStream = nullptr; // 输入流
+
+    // const 说明我们只是引用，不是我们创建的，不用释放
     const AVCodec* dec = nullptr;  //解码器
     AVCodecContext* decCtx = nullptr; // 解码器上下文
+
+    AVPacket* avPacket = nullptr;
+    AVFrame* avFrame = nullptr;
 
 };
 

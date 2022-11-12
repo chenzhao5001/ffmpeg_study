@@ -31,9 +31,10 @@ void PlayWindow::setPlayFilePath(std::string path) {
 }
 
 void PlayWindow::windowShow() {
+    SDL_Event mWinEv;
     do {
-        SDL_Event mWinEv;
-        SDL_WaitEvent(&mWinEv);
+//        SDL_WaitEvent(&mWinEv);
+        SDL_PollEvent(&mWinEv);
         switch (mWinEv.type) {
             case SDL_QUIT:
                 winQuit = 0;

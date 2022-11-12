@@ -7,7 +7,20 @@
 
 MediaControl::MediaControl() {}
 
-MediaControl::~MediaControl() {}
+MediaControl::~MediaControl() {
+    if(avFrame) {
+        av_frame_free(&avFrame);
+    }
+    if(avPacket) {
+        av_packet_free(&avPacket);
+    }
+    if(decCtx) {
+        avcodec_free_context(&decCtx);
+    }
+    if(fmt) {
+        avformat_free_context(fmt);
+    }
+}
 
 
 
@@ -36,14 +49,16 @@ MediaRect MediaControl::openFmt(std::string path) {
     ret = avcodec_open2(this->decCtx,this->dec, nullptr);
     std::cout << "avcodec_open2: ret = " << ret << std::endl;
 
-    AVPacket* avPacket = av_packet_alloc();
-    AVFrame* avFrame = av_frame_alloc();
-    while (av_read_frame(this->fmt,avPacket) > 0) {
-
-        if(avPacket->stream_index == this->idx) {
+    avPacket = av_packet_alloc();
+    avFrame= av_frame_alloc();
+    // 从多媒体文件中读取数据
+    while (av_read_frame(fmt,avPacket) > 0) {
+        if(avPacket->stream_index == idx) {
 //            this->dec(this->decCtx,)
-
         }
+
+        //每次调用要减引用基数，否则有内存泄露
+        av_packet_unref(avPacket);
     }
 
     int width = this->decCtx->width;
