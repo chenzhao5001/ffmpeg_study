@@ -105,6 +105,7 @@ int MediaControl::decode(VideoState& videoState) {
 void MediaControl::render(VideoState& videoState) {
     // rect 设置成null，整个纹理进行更新
     // 渲染纹理
+//    std::cout << videoState.avFrame->data[0] << videoState.avFrame->data[0] << videoState.avFrame->data[0];
     SDL_UpdateYUVTexture(videoState.texture,
                          nullptr,
                          videoState.avFrame->data[0], videoState.avFrame->linesize[0], // yvu 中的Y
@@ -113,7 +114,13 @@ void MediaControl::render(VideoState& videoState) {
                          );
     SDL_RenderClear(windowCell.pRender);
     // null1 整个纹理  null2 整个窗口
-    SDL_RenderCopy(windowCell.pRender, windowCell.pTexture, nullptr, nullptr);
+    SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 500;
+    rect.h = 500;
+
+    SDL_RenderCopy(windowCell.pRender, videoState.texture, nullptr, nullptr);
     SDL_RenderPresent(windowCell.pRender);
     std::cout << "test" << std::endl;
 }

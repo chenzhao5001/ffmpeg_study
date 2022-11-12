@@ -27,6 +27,8 @@ add_executable(ffmpeg_test
         util/audio_control.h
         util/codec.cpp
         util/codec.h
+        util/audio_extra.cpp
+
         player/newPlay.cpp
         player/newPlay.h
         player/openglPlayer.cpp
@@ -41,9 +43,11 @@ add_executable(ffmpeg_test
 
 target_link_libraries( # Specifies the target library.
         ffmpeg_test
-        avcodec.lib
-        avutil.lib
-        avformat.lib
+
+        avformat-59.dll
+        avcodec-59.dll
+        avutil-57.dll
+
         SDL2.dll
         glfw3.a
         hehe
