@@ -3,28 +3,20 @@
 #include "window/MediaControl.h"
 
 
-void foo(int **p) {
-    *p = new int;
-    (**p) = 200;
-}
-
 int main() {
 
-    int* p = nullptr;
-    foo(&p);
-    std::cout << *p << std::endl;
-    std::cout << p << std::endl;
-
-
-
-
     WindowControl wCtrl;
-
     MediaControl mediaControl;
-    mediaControl.openFmt("./test.mp4");
-
-    wCtrl.createWindow();
+    wCtrl.createWindow("play_test",100,100,600,400);
     wCtrl.playWindow();
+
+
+//    wCtrl.createWindow();
+//    MediaRect mediaRect = mediaControl.openFmt("./test.mp4");
+//
+//    wCtrl.createTexture(mediaRect.width,mediaRect.height);
+//    wCtrl.playWindow();
+
 
 
     return 0;

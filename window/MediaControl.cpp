@@ -8,7 +8,7 @@
 MediaControl::MediaControl() {}
 MediaControl::~MediaControl() {}
 
-void MediaControl::openFmt(std::string path) {
+MediaRect MediaControl::openFmt(std::string path) {
     int ret = avformat_open_input(&this->fmt,path.c_str(),NULL,NULL);
     std::cout << "avformat_open_input call: ret = " << ret << std::endl;
     // 对流信息提取
@@ -31,6 +31,18 @@ void MediaControl::openFmt(std::string path) {
     ret = avcodec_open2(this->decCtx,this->dec, nullptr);
     std::cout << "avcodec_open2: ret = " << ret << std::endl;
 
+    AVPacket* avPacket = av_packet_alloc();
+    AVFrame* avFrame = av_frame_alloc();
+    while (av_read_frame(this->fmt,avPacket) > 0) {
 
+        if(avPacket->stream_index == this->idx) {
+//            this->dec(this->decCtx,)
 
+        }
+
+    }
+
+    int width = this->decCtx->width;
+    int height = this->decCtx->height;
+    return MediaRect{width,height};
 }

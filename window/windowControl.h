@@ -4,18 +4,18 @@
 
 #ifndef FFMPEG_TEST_WINDOWCONTROL_H
 #define FFMPEG_TEST_WINDOWCONTROL_H
-#define SDL_MAIN_HANDLED
-extern "C" {
-#include <SDL.h>
-};
 
+#include <string>
+#include "mediaWindow.h"
 class WindowControl {
-    SDL_Window* pWindow = NULL;
-    SDL_Renderer* pRender = NULL;
+
+public: MediaWindow* mediaWindow = nullptr;
+
 public:
     WindowControl();
     ~WindowControl();
-    void createWindow();
+    void createWindow(std::string string,int x,int y,int w,int h);
+    void createTexture(int width,int height);
     void playWindow();
     void destroyWindow();
 private:

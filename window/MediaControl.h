@@ -13,6 +13,12 @@ extern "C" {
 };
 
 #include <string>
+#include "windowControl.h"
+
+struct MediaRect {
+    int width;
+    int height;
+};
 
 
 class MediaControl {
@@ -20,7 +26,7 @@ class MediaControl {
 public:
     MediaControl();
     ~MediaControl();
-    void openFmt(std::string path);
+    MediaRect openFmt(std::string path);
 
 private:
     AVFormatContext* fmt = nullptr;
