@@ -20,7 +20,8 @@ void extra_audio() {
 
     int ret = -1;
     const string filePath = "./test.mp4";
-    const string outputFile = "./test_out";
+    //这里后缀一定要写对，否则会报错。
+    const string outputFile = "./test_out.aac";
     AVFormatContext* avFormatContext = nullptr;
     AVFormatContext* oAVFormatContext = nullptr;
 
@@ -39,7 +40,7 @@ void extra_audio() {
 
     // 减少设置参数复杂度
     const AVOutputFormat*  avOutputFormat = av_guess_format(nullptr,outputFile.c_str(), nullptr);
-    cout << "av_guess_format ret = " << avOutputFormat << endl;
+    cout << "av_guess_format ret!!!! = " << avOutputFormat << endl;
     oAVFormatContext->oformat = avOutputFormat;
 
     // 为目标文件设设置流
