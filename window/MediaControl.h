@@ -10,6 +10,8 @@ extern "C" {
 #include <libavformat/avformat.h>
 #include <libavutil/avutil.h>
 #include <libavcodec/avcodec.h>
+
+#include <SDL.h>
 };
 
 #include <string>
@@ -20,6 +22,12 @@ struct MediaRect {
     int width;
     int height;
 };
+typedef struct _VideoState {
+    AVCodecContext* avCtx;
+    AVPacket*       avPkt;
+    AVFrame*        avFrame;
+    SDL_Texture*    texture;
+} VideoState;
 
 
 class MediaControl {
@@ -42,6 +50,9 @@ private:
     AVPacket* avPacket = nullptr;
     AVFrame* avFrame = nullptr;
 
+private:
+    int decode(VideoState& videoState);
+    void render(VideoState& videoState);
 };
 
 

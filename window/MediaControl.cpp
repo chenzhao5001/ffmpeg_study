@@ -66,3 +66,25 @@ MediaRect MediaControl::openFmt(std::string path) {
     int height = this->decCtx->height;
     return MediaRect{width,height};
 }
+
+int MediaControl::decode(VideoState& videoState) {
+    int ret = -1;
+    char buf[1024];
+    ret = avcodec_send_packet(videoState.avCtx,videoState.avPkt);
+    std::cout << "avcodec_send_packet called,ret = " << ret << std::endl;
+
+    while (ret >=0) {
+        // 解码成功后 videoState.avFrame 里面就有解码后的frame
+        ret = avcodec_receive_frame(videoState.avCtx,videoState.avFrame);
+        if(ret == AVERROR(EAGAIN) || ret == AVERROR_EOF) {
+            return 0;  // 外层继续读取，送进了新的
+        } else if(ret < 0) {
+            return -1; // 错误
+        }
+        render(videoState);
+    }
+}
+
+void MediaControl::render(VideoState& videoState) {
+
+}
