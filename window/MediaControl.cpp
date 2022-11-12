@@ -58,11 +58,12 @@ MediaRect MediaControl::openFmt(std::string path) {
     videoState.avCtx = decCtx;
     videoState.avPkt = avPacket;
     videoState.avFrame = avFrame;
-    videoState.texture = nullptr;
+    videoState.texture = windowCell.pTexture;
 
+//    ret = av_read_frame(fmt,avPacket);
 
     // 从多媒体文件中读取数据
-    while (av_read_frame(fmt,avPacket) > 0) {
+    while (av_read_frame(fmt,avPacket) >= 0) {
         if(avPacket->stream_index == idx) {
             decode(videoState);
 //            this->dec(this->decCtx,)
