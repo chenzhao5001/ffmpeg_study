@@ -1,14 +1,24 @@
 #include <iostream>
 #include "window/windowControl.h"
-#include "window/MediaControl.h"
+//#include "window/MediaControl.h"
+
+#include "window/PlayWindow.h"
 
 
 int main() {
 
-    WindowControl wCtrl;
-    MediaControl mediaControl;
-    wCtrl.createWindow("play_test",100,100,600,400);
-    wCtrl.playWindow();
+    PlayWindow playWindow;
+    playWindow.setWindowInfo("hello", 100,100,600,400);
+
+    playWindow.windowShow();
+
+
+//    WindowControl wCtrl;
+//    wCtrl
+
+//    MediaWindow* mediaWindow = wCtrl.createWindow("play_test",100,100,600,400);
+
+//    wCtrl.playWindow();
 
 
 //    wCtrl.createWindow();

@@ -6,7 +6,12 @@
 #include "MediaControl.h"
 
 MediaControl::MediaControl() {}
+
 MediaControl::~MediaControl() {}
+
+
+
+
 
 MediaRect MediaControl::openFmt(std::string path) {
     int ret = avformat_open_input(&this->fmt,path.c_str(),NULL,NULL);
@@ -39,7 +44,6 @@ MediaRect MediaControl::openFmt(std::string path) {
 //            this->dec(this->decCtx,)
 
         }
-
     }
 
     int width = this->decCtx->width;

@@ -14,7 +14,7 @@ public: MediaWindow* mediaWindow = nullptr;
 public:
     WindowControl();
     ~WindowControl();
-    void createWindow(std::string string,int x,int y,int w,int h);
+    MediaWindow* createWindow(std::string string,int x,int y,int w,int h);
     void createTexture(int width,int height);
     void playWindow();
     void destroyWindow();

@@ -14,6 +14,7 @@ extern "C" {
 
 #include <string>
 #include "windowControl.h"
+#include "mediaWindow.h"
 
 struct MediaRect {
     int width;
@@ -22,11 +23,11 @@ struct MediaRect {
 
 
 class MediaControl {
-
 public:
     MediaControl();
     ~MediaControl();
     MediaRect openFmt(std::string path);
+
 
 private:
     AVFormatContext* fmt = nullptr;
@@ -34,7 +35,6 @@ private:
     AVStream* inStream = nullptr; // 输入流
     const AVCodec* dec = nullptr;  //解码器
     AVCodecContext* decCtx = nullptr; // 解码器上下文
-
 
 };
 

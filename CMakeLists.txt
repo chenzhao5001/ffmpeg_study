@@ -36,7 +36,7 @@ add_executable(ffmpeg_test
         window/MediaControl.cpp
         window/MediaControl.h
         window/mediaWindow.cpp
-        window/mediaWindow.h)
+        window/mediaWindow.h window/PlayWindow.cpp window/PlayWindow.h)
 
 
 

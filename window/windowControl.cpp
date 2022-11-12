@@ -6,8 +6,9 @@ WindowControl::WindowControl() {
 }
 WindowControl::~WindowControl() {}
 
-void WindowControl::createWindow(std::string title,int x,int y,int w,int h) {
+MediaWindow* WindowControl::createWindow(std::string title,int x,int y,int w,int h) {
     mediaWindow = new MediaWindow(title,x,y,w,h);
+    return mediaWindow;
 }
 
 void WindowControl::createTexture(int width,int height) {
