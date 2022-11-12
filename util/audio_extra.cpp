@@ -46,8 +46,9 @@ void extra_audio() {
     AVStream* outStream =  avformat_new_stream(oAVFormatContext, nullptr);
     cout << "avformat_new_stream ret = " << outStream << endl;
 
-    //拷贝流
+    //获取输入流
     AVStream* inStream = avFormatContext->streams[index];
+    //拷贝流
     ret = avcodec_parameters_copy(outStream->codecpar,inStream->codecpar);
     cout << "avcodec_parameters_copy ret = " << ret << endl;
 
@@ -60,11 +61,29 @@ void extra_audio() {
     cout << errInfo(ret) << endl;
 
     // 写多媒体头到目标文件
+    ret = avformat_write_header(oAVFormatContext, nullptr);
+    cout << "avformat_write_header ret = " << ret << endl;
 
+    //读取频频数据，并写入
+    AVPacket avPacket;
+    while (av_read_frame(avFormatContext,&avPacket) >=0) {
+        if(avPacket.stream_index == index) {
+            // 改变时间戳,除不尽，算近似值
+            // 时间基（毫秒，微妙）
+            avPacket.pts = av_rescale_q_rnd(avPacket.pts,inStream->time_base,outStream->time_base,
+                                            static_cast<AVRounding>(AV_ROUND_NEAR_INF | AV_ROUND_PASS_MINMAX));
+            avPacket.dts = avPacket.pts;
+            avPacket.duration = av_rescale_q(avPacket.duration,inStream->time_base,outStream->time_base);
+            avPacket.stream_index = 0;
+            avPacket.pos = -1;
+            av_interleaved_write_frame(oAVFormatContext,&avPacket);
+            // 需要减少引用计数，否则有泄露。
+            av_packet_unref(&avPacket);
+        }
+    }
 
+    av_write_trailer(oAVFormatContext);
 
-
-
-
+    // 释放资源
     return;
 }
