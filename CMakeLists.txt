@@ -36,7 +36,7 @@ add_executable(ffmpeg_test
         window/MediaControl.cpp
         window/MediaControl.h
         window/PlayWindow.cpp
-        window/PlayWindow.h util/remux.cpp)
+        window/PlayWindow.h util/remux.cpp util/cut.cpp)
 
 
 

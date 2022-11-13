@@ -2,11 +2,11 @@
 
 //void extra_audio();
 //void extra_video();
-void remux();
+//void remux();
+void cut();
+
 int main() {
-
-    remux();
-
+    cut();
 //    PlayWindow playWindow;
 //    playWindow.mediaInit();
 //    playWindow.setWindowInfo("hello", 100,100,600,400);
